@@ -34,6 +34,16 @@ Typical install time is approximately 10 minutes on a "normal" desktop computer.
 4. Expected output: The notebook will display output cells after execution. (NPI-inferred FC closely resembles empirical-FC, while NPI-inferred EC shows a strong correspondence with both real-EC and SC.)
 5. Expected run time for the demo is approximately 20 minutes on a "normal" desktop computer.
 
-### **Instructions for use**
+### Instructions for Use
 
 To reproduce the quantitative results, please follow the steps outlined in `NPI_demo.ipynb`.
+
+If you have any questions or encounter any issues, please do not hesitate to contact us.
+
+### Whole-brain EC Resources
+
+In the `Whole-brain_EC` folder, we offer EC data across various Atlases to aid your brain connectivity research. The entry at the i-th row and j-th column represents the EC from brain region i to brain region j.
+
+### Simulation Data Resources
+
+In the `MFM_simulation_data` and `RNN_simulation_data` folders, we provide code for generating simulation data along with the generated simulation datasets themselves. These datasets are intended for use in validating the effectiveness of the NPI framework.

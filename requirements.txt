@@ -1,6 +1,7 @@
 numpy
 torch
 scipy
+nilearn
 matplotlib
 seaborn
 jupyter

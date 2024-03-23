@@ -1,0 +1,39 @@
+L Aud
+R Aud
+Striate
+L DMN
+Med DMN
+Front DMN
+R DMN
+Occ post
+Motor
+R DLPFC
+R Front pol
+R Par
+R Post Temp
+Basal
+L Par
+L DLPFC
+L Front pol
+L IPS
+R IPS
+L LOC
+Vis
+R LOC
+D ACC
+V ACC
+R A Ins
+L STS
+R STS
+L TPJ
+Broca
+Sup Front S
+R TPJ
+R Pars Op
+Cereb
+Dors PCC
+L Ins
+Cing
+R Ins
+L Ant IPS
+R Ant IPS
