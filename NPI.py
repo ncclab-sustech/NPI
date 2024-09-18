@@ -54,18 +54,24 @@ class ANN_CNN(nn.Module):
 class ANN_RNN(nn.Module):
 
     "Use RNN as a surrogate brain"
-
-    def __init__(self, input_dim, hidden_dim, output_dim, data_length):
+    
+    def __init__(self, input_dim, hidden_dim, latent_dim, output_dim, data_length):
         super().__init__()
-        self.data_length = data_length
         self.input_dim = input_dim
-        self.rnn = nn.RNN(input_dim, hidden_dim, batch_first = True).to(device)
-        self.Linear = nn.Linear(hidden_dim, output_dim).to(device)
+        self.data_length = data_length
+        self.enc = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, latent_dim),
+        ).to(device)
+        self.rnn = nn.RNN(input_size = 1, hidden_size = latent_dim, batch_first = True).to(device)
+        self.output = nn.Linear(latent_dim, output_dim).to(device)
 
     def forward(self, x):
         x = x.view(-1, self.data_length, self.input_dim)
-        x, _ = self.rnn(x)
-        return self.Linear(x[:, -1, :])
+        encodes = self.enc(x)
+        ht, _ = self.rnn(torch.zeros((x.shape[0], 1, 1)).to(device), torch.permute(encodes[:, self.data_length-1:, :], (1, 0, 2)).contiguous())
+        return self.output(ht)[:,0,:]
 
 
 
@@ -114,7 +120,7 @@ def train_NN(model, input_X, target_Y, batch_size = 50, train_set_proportion = 0
     trainer = torch.optim.Adam(model.parameters(), lr = lr, weight_decay = l2)
 
     train_epoch_loss = []; test_epoch_loss = []
-    for epoch in range(num_epochs):
+    for _ in range(num_epochs):
         model.train()
         for X, y in train_iter:
             y_hat = model(X)
@@ -158,10 +164,13 @@ def model_FC(model, node_num, steps):
     for _ in range(steps): NN_sim.append(np.zeros(node_num))
     for _ in range(1200):
         noise = 0.1 * np.random.randn(steps * node_num)
-        model_input = np.array(NN_sim[-3:]).flatten() + noise
-        NN_sim.append(model(torch.tensor(model_input, dtype = torch.float).to(device)).detach().cpu().numpy())
+        model_input = np.array(NN_sim[-steps:]).flatten() + noise
+        if isinstance(model, ANN_RNN): NN_sim.append(model(torch.tensor(model_input, dtype = torch.float).to(device)).detach().cpu().numpy()[0])
+        else: NN_sim.append(model(torch.tensor(model_input, dtype = torch.float).to(device)).detach().cpu().numpy())
     NN_sim = np.array(NN_sim)
     return corrcoef(NN_sim)
+
+
 
 def model_EC(model, input_X, target_Y, pert_strength):
 
@@ -171,8 +180,24 @@ def model_EC(model, input_X, target_Y, pert_strength):
     steps = int(input_X.shape[1] / node_num)
     NPI_EC = np.zeros((node_num, node_num))
     for node in range(node_num):
-        unperturbed_output = model(torch.tensor(input_X[0::6], dtype = torch.float).to(device)).detach().cpu().numpy()
+        unperturbed_output = model(torch.tensor(input_X, dtype = torch.float).to(device)).detach().cpu().numpy()
         perturbation = np.zeros((steps, node_num)); perturbation[-1, node] = pert_strength
-        perturbed_output = model(torch.tensor(input_X[0::6] + perturbation.flatten(), dtype = torch.float).to(device)).detach().cpu().numpy()
+        perturbed_output = model(torch.tensor(input_X + perturbation.flatten(), dtype = torch.float).to(device)).detach().cpu().numpy()
         NPI_EC[node] = np.mean(perturbed_output - unperturbed_output, axis = 0)
     return NPI_EC
+
+
+
+def model_Jacobian(model, input_X, steps):
+
+    "Calculate the Jacobian matrix of the model"
+
+    node_num = int(input_X.shape[1] / steps)
+    jacobian = np.zeros((node_num, node_num))
+    model.train()
+    for i in range(input_X.shape[0]): 
+        if isinstance(model, ANN_RNN): jacobian += torch.autograd.functional.jacobian(model, torch.tensor(input_X[i], dtype = torch.float).to(device)).cpu().detach().numpy()[0, :, -node_num:]
+        else: jacobian += torch.autograd.functional.jacobian(model, torch.tensor(input_X[i], dtype = torch.float).to(device)).cpu().detach().numpy()[:, -node_num:]
+    model.eval()
+    jacobian_EC = jacobian.T / input_X.shape[0]
+    return jacobian_EC
