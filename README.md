@@ -10,7 +10,7 @@ This repository provides demonstration scripts for generating synthetic neural d
 
 **Operating Systems**: Windows 10, Ubuntu 20.04
 
-**Python Version**: 3.8+
+**Python Version**: 3.12+
 
 **Dependencies**: See `requirements.txt` file for details.
 
