@@ -34,37 +34,43 @@ Typical installation time is approximately 5 minutes on a "normal" desktop compu
 
 ## **How to run**
 
-The notebook files `NPI_demo(RNN).ipynb` and `NPI_demo(MFM).ipynb` contain step-by-step instructions, including how to load and prepare your data, train an ANN as a surrogate brain, simulate long time series under noise-driven conditions and calculate the model functional connectivity (FC), and perturb the surrogate brain to obtain EC.
+The notebook `.ipynb` files contain step-by-step instructions, including how to load and prepare your data, train an ANN as a surrogate brain, simulate long time series under noise-driven conditions and calculate the model functional connectivity (FC), and perturb the surrogate brain to obtain EC.
 
 ## **Demo examples**
 
-`NPI_demo(RNN).ipynb` and `NPI_demo(MFM).ipynb` showcase the application of NPI on simulated data derived from recurrent neural network (RNN) and mean-field model (MFM) under given structural connectivity (SC). These demos serve to illustrate the process of applying NPI to infer EC, and comparing the NPI-inferred EC with ground-truth EC and SC.
+Demos `NPI_demo(RNN).ipynb` and `NPI_demo(WBM).ipynb` show the application of NPI to simulated data derived from recurrent neural network (RNN) and whole-brain model (WBM) under given structural connectivity (SC). These demos serve to illustrate the process of applying NPI to infer EC, and comparing the NPI-inferred EC with ground-truth EC and SC. Demo `NPI_demo(fMRI).ipynb` shows applying of NPI on real individual fMRI data from HCP dataset to infer individual EC.
 
 **Demo 1: RNN synthetic data**
 
-- **Overview**: This demo offers a detailed walkthrough of applying NPI to RNN simulated data based on a predefined SC matrix. It encompasses the generation of synthetic neural signals, obtaining ground-truth EC by direct perturbation of the RNN, applying NPI to infer EC from the RNN simulated data, and a comparison of the NPI-inferred EC with the ground-truth EC and SC, assessing the accuracy and reliability of the NPI framework in capturing directed causal interactions.
+- **Overview**: Demo `NPI_demo(RNN).ipynb` applies NPI to ground-truth RNN simulated data. It encompasses the generation of synthetic neural signals, obtaining ground-truth EC by direct perturbation of the RNN, applying NPI to infer EC from the RNN simulated data, and a comparison of the NPI-inferred EC with the ground-truth EC and SC, assessing the accuracy and reliability of the NPI framework in capturing directed causal interactions.
 - **Simulation data resources**: Located in the `RNN_simulation data` folder, we provide the code necessary for using RNN to generate synthetic neural data and ground-truth EC. The folder contains detailed descriptions of the model parameters and simulation process.
 
-**Demo 2: MFM synthetic data**
+**Demo 2: WBM synthetic data**
 
-- **Overview**: This demo offers a detailed walkthrough of applying NPI to MFM simulated data based on a predefined SC matrix. It encompasses the generation of synthetic neural signals, obtaining ground-truth EC by direct perturbation of the MFM, applying NPI to infer EC from the MFM simulated data, and a comparison of the NPI-inferred EC with the ground-truth EC and SC, assessing the accuracy and reliability of the NPI framework in capturing direct causal interactions.
-- **Simulation data resources**: Located in the `MFM_simulation data` folder, we provide the code necessary for using RNN to generate synthetic neural data and ground-truth EC. The folder contains detailed descriptions of the model parameters and simulation process.
+- **Overview**: Demo `NPI_demo(WBM).ipynb` applies NPI to WBM simulated data. It encompasses the generation of synthetic neural signals, obtaining ground-truth EC by direct perturbation of the WBM, applying NPI to infer EC from the WBM simulated data, and a comparison of the NPI-inferred EC with the ground-truth EC and SC, assessing the accuracy and reliability of the NPI framework in capturing direct causal interactions.
+- **Simulation data resources**: Located in the `WBM_simulation data` folder, we provide the code necessary for using RNN to generate synthetic neural data and ground-truth EC. The folder contains detailed descriptions of the model parameters and simulation process.
+
+**Demo 3: fMRI data from HCP dataset**
+
+- **Overview**: Demo `NPI_demo(fMRI).ipynb` applies NPI to real fMRI data from HCP dataset of an individual. It encompasses applying NPI to infer EC from BOLD signals of an individual and a comparison of model FC and empirical FC.
 
 **How to run the demos**
 
 1. **Launch Jupyter Notebook**: Start from the project directory by launching the Jupyter Notebook.
-2. **Open the demo notebook**: Select the demo notebook corresponding to either RNN or MFM synthetic data.
+2. **Open the demo notebook**: Select the demo notebook corresponding to either RNN or WBM synthetic data.
 3. **Follow the instructions**: Each notebook provides step-by-step instructions for loading data, training the model, applying NPI, and analyzing results.
 4. **Expected output**: The notebook will display output cells after execution. (Model FC closely resembles empirical FC, while NPI-inferred EC shows a strong correspondence with both ground-truth EC and SC.)
-5. **Expected run time**: Expected total run time for the two demo is approximately 25 minutes on a "normal" desktop computer.
+5. **Expected run time**: Expected total run time for the three demos is approximately 30 minutes on a "normal" desktop computer.
 
 ## **Whole-brain EC resources**
 
 Within the `Whole-brain_EC` directory, we provide EC data across various brain atlases, offering insights into brain connectivity research. The EC matrices represent the causal interactions between different brain regions, derived from resting-state fMRI data of subjects within the Human Connectome Project (HCP) dataset.
 
-Specifically, we calculated the EC matrices based on the AAL, MMP, MSDL atlases across 800 subjects and the Schaefer2018 atlases across 100 subjects. For each atlas, we calculated the individual EC matrices for all subjects and then averaged these matrices at the group level to obtain a representative EC matrix for each atlas. All EC matrices are normalized so that the strongest connection in each matrix has a value of 1.
+Specifically, we calculated the EC matrices based on the MMP (360 regions), AAL (116 regions), MSDL (39 regions) atlases across 800 subjects and the Schaefer2018 atlases (with 100, 200, ..., 1000 regions) across 100 subjects. For each atlas, we calculated the individual EC matrices for all subjects and then averaged these matrices at the group level to obtain a representative EC matrix for each atlas. All EC matrices are normalized so that the strongest connection in each matrix has a value of 1.
 
 We provide a notebook file `Whole-brain_EC/Whole-brain_EC.ipynb` that allow for the visualization of these EC matrices. Offering these detailed EC resources, we aim to facilitate research into the structural and functional interplay of the brain and support the development of novel diagnostic and therapeutic strategies in neuroscience.
+
+<img src=".\img\ebc.png" alt="NPI_framework" style="zoom:80%;" />
 
 ## **How to cite**
 
