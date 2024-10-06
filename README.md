@@ -64,7 +64,7 @@ Demos `NPI_demo(RNN).ipynb` and `NPI_demo(WBM).ipynb` show the application of NP
 
 ## **Whole-brain EC resources**
 
-Within the `Whole-brain_EC` directory, we provide EC data across various brain atlases, offering insights into brain connectivity research. The EC matrices represent the causal interactions between different brain regions, derived from resting-state fMRI data of subjects within the Human Connectome Project (HCP) dataset.
+Within the `Whole-brain_EC` directory, we provide EC data across various brain atlases, offering insights into brain connectivity research. The EC matrices represent the causal interactions between different brain regions, derived from resting-state fMRI data of subjects within the Human Connectome Project (HCP) dataset. A row of the EC matrix represents the output EC from a source region to all other regions. A column of the EC matrix represents the input EC from all other regions to a target region.
 
 Specifically, we calculated the EC matrices based on the MMP (360 regions), AAL (116 regions), MSDL (39 regions) atlases across 800 subjects and the Schaefer2018 atlases (with 100, 200, ..., 1000 regions) across 100 subjects. For each atlas, we calculated the individual EC matrices for all subjects and then averaged these matrices at the group level to obtain a representative EC matrix for each atlas. All EC matrices are normalized so that the strongest connection in each matrix has a value of 1.
 
