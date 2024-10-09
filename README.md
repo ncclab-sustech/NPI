@@ -12,6 +12,18 @@ Effective connectivity (EC), indicative of the causal interactions between brain
 
 This repository contains the code and documentation of the NPI framework, a tool designed for mapping whole-brain EC in the brain. NPI operates by first training an ANN to mimic the complex dynamics of the brain based on the observed neural data. Once trained, virtual perturbations are applied to specific regions of the ANN to simulate the effect of neural stimulation. By monitoring the responses in other brain regions, NPI constructs a comprehensive map of the causal relationships, detailing how each area influences others across the brain. This process allows for the assessment of not only the presence but also the direction and excitatory/inhibitory properties of neural connections, contributing to a deeper comprehension of the brain's functional architecture.
 
+## **Methodology**
+
+<img src=".\img\dynamics.gif" alt="dynamics" style="zoom:100%;" />
+
+1. <u>**Utilize an ANN to serve as a surrogate brain.**</u>
+
+   NPI utilizes ANN to learn the brain’s complex, nonlinear dynamics directly from data. This approach allows NPI to adapt to a wide range of data types and dynamics. The use of advanced AI techniques, such as pre-training (to train a group-level surrogate model) and fine-tuning (to obtain individual-level surrogate models), further enhances our model’s applicability to both group-level and individual-level analyses.
+
+2. <u>**Apply virtual perturbation to ANN for inferring EC.**</u>
+
+   NPI provides flexibility in the pattern of perturbations once the surrogate model is well-trained. It is not constrained to a fixed-size perturbation and can accommodate various forms and scales of perturbations, tailored to specific research needs. This adaptability enhances NPI’s applicability across diverse experimental settings and research questions.
+
 ## **Requirements**
 
 **Operating Systems**: Windows 10, Ubuntu 20.04
