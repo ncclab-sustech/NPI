@@ -16,11 +16,11 @@ This repository contains the code and documentation of the NPI framework, a tool
 
 <img src=".\img\dynamics.gif" alt="dynamics" style="zoom:100%;" />
 
-1. <u>**Utilize an ANN to serve as a surrogate brain.**</u>
+1. **Utilize an ANN to serve as a surrogate brain.**
 
    NPI utilizes ANN to learn the brain’s complex, nonlinear dynamics directly from data. This approach allows NPI to adapt to a wide range of data types and dynamics. The use of advanced AI techniques, such as pre-training (to train a group-level surrogate model) and fine-tuning (to obtain individual-level surrogate models), further enhances our model’s applicability to both group-level and individual-level analyses.
 
-2. <u>**Apply virtual perturbation to ANN for inferring EC.**</u>
+2. **Apply virtual perturbation to ANN for inferring EC.**
 
    NPI provides flexibility in the pattern of perturbations once the surrogate model is well-trained. It is not constrained to a fixed-size perturbation and can accommodate various forms and scales of perturbations, tailored to specific research needs. This adaptability enhances NPI’s applicability across diverse experimental settings and research questions.
 
