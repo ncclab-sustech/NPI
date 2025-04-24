@@ -1,6 +1,6 @@
 # NPI
 
-[Mapping effective connectivity by virtually perturbing a surrogate brain](https://arxiv.org/abs/2301.00148)
+[Mapping effective connectivity by virtually perturbing a surrogate brain](https://www.nature.com/articles/s41592-025-02654-x)
 
 ## **Abstract**
 
@@ -88,7 +88,7 @@ We provide a notebook file `Whole-brain_EC/Whole-brain_EC.ipynb` that allow for 
 
 If you use NPI in your research, please cite our paper:
 
-- Luo, Z., Peng, K., Liang, Z. et al. Mapping effective connectivity by virtually perturbing a surrogate brain. [ https://doi.org/10.48550/arXiv.2301.00148](https://doi.org/10.48550/arXiv.2301.00148)
+- Luo, Z., Peng, K., Liang, Z. *et al.* Mapping effective connectivity by virtually perturbing a surrogate brain. *Nat Methods* (2025). [https://doi.org/10.1038/s41592-025-02654-x](https://doi.org/10.1038/s41592-025-02654-x)
 
 ## **Contact**
 
